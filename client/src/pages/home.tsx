@@ -212,14 +212,21 @@ export default function Home() {
                 <Thermometer className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-slate-900">Junction Asia Temperature Voting System</h1>
-                <p className="text-sm text-slate-600">Real-time Zone Temperature Control</p>
+                <h1 className="text-xl font-bold text-slate-900">
+                  Junction Asia Temperature Voting System
+                </h1>
+                <p className="text-sm text-slate-600">
+                  Real-time Zone Temperature Control
+                </p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2 text-sm text-slate-600">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span data-testid="connected-users">{stats?.connectedUsers || 0}</span> users online
+                <span data-testid="connected-users">
+                  {stats?.connectedUsers || 0}
+                </span>{" "}
+                users online
               </div>
             </div>
           </div>
@@ -234,10 +241,18 @@ export default function Home() {
               <TrendingUp className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-slate-900 mb-2">How to Use</h2>
+              <h2 className="text-lg font-semibold text-slate-900 mb-2">
+                How to Use
+              </h2>
               <p className="text-slate-700 mb-3">
-                To adjust the temperature of each zone, click the <span className="font-medium text-red-600">Warmer</span> or{' '}
-                <span className="font-medium text-blue-600">Cooler</span> buttons.
+                To adjust the temperature of each zone, click the{" "}
+                <span className="font-medium text-red-600">Warmer</span> or{" "}
+                <span className="font-medium text-blue-600">Cooler</span>{" "}
+                buttons.
+              </p>
+              <p className="text-slate-700 mb-3">
+                The vote count only shows the number of votes cast within the
+                last 10 minutes.
               </p>
               <div className="flex flex-wrap gap-2 text-sm">
                 <span className="bg-white px-3 py-1 rounded-full text-slate-600 border border-slate-200">
@@ -260,21 +275,35 @@ export default function Home() {
         {/* Temperature Zones Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           {zones?.map((zone) => {
-            const IconComponent = zoneIcons[zone.id as keyof typeof zoneIcons] || Users;
+            const IconComponent =
+              zoneIcons[zone.id as keyof typeof zoneIcons] || Users;
             const colorClass = zoneColors[zone.id as keyof typeof zoneColors];
             const totalVotes = zone.hotVotes + zone.coldVotes;
-            const hotPercentage = totalVotes > 0 ? (zone.hotVotes / totalVotes) * 100 : 50;
-            
+            const hotPercentage =
+              totalVotes > 0 ? (zone.hotVotes / totalVotes) * 100 : 50;
+
             return (
-              <Card key={zone.id} className="overflow-hidden hover:shadow-xl transition-all duration-300" data-testid={`zone-card-${zone.id}`}>
+              <Card
+                key={zone.id}
+                className="overflow-hidden hover:shadow-xl transition-all duration-300"
+                data-testid={`zone-card-${zone.id}`}
+              >
                 <div className={`bg-gradient-to-r ${colorClass} px-6 py-4`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <IconComponent className="w-5 h-5 text-white" />
-                      <h3 className="text-white font-semibold text-lg" data-testid={`zone-name-${zone.id}`}>{zone.name}</h3>
+                      <h3
+                        className="text-white font-semibold text-lg"
+                        data-testid={`zone-name-${zone.id}`}
+                      >
+                        {zone.name}
+                      </h3>
                     </div>
                     <div className="bg-white/20 px-2 py-1 rounded-full">
-                      <span className="text-white text-xs font-medium" data-testid={`active-voters-${zone.id}`}>
+                      <span
+                        className="text-white text-xs font-medium"
+                        data-testid={`active-voters-${zone.id}`}
+                      >
                         {zone.activeVoters} users
                       </span>
                     </div>
@@ -290,7 +319,7 @@ export default function Home() {
                   {/* Voting Buttons */}
                   <div className="grid grid-cols-2 gap-3 mb-4">
                     <Button
-                      onClick={() => handleVote(zone.id, 'hot')}
+                      onClick={() => handleVote(zone.id, "hot")}
                       disabled={voteMutation.isPending}
                       className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl active:scale-95 transition-all duration-200"
                       data-testid={`button-hot-${zone.id}`}
@@ -299,7 +328,7 @@ export default function Home() {
                       Warmer
                     </Button>
                     <Button
-                      onClick={() => handleVote(zone.id, 'cold')}
+                      onClick={() => handleVote(zone.id, "cold")}
                       disabled={voteMutation.isPending}
                       className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl active:scale-95 transition-all duration-200"
                       data-testid={`button-cold-${zone.id}`}
@@ -315,14 +344,20 @@ export default function Home() {
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 bg-red-500 rounded-full"></div>
                         <span className="text-slate-600">Warmer</span>
-                        <span className="font-semibold text-red-600" data-testid={`hot-votes-${zone.id}`}>
+                        <span
+                          className="font-semibold text-red-600"
+                          data-testid={`hot-votes-${zone.id}`}
+                        >
                           {zone.hotVotes} votes
                         </span>
                       </div>
                       <div className="flex items-center space-x-2">
                         <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
                         <span className="text-slate-600">Cooler</span>
-                        <span className="font-semibold text-blue-600" data-testid={`cold-votes-${zone.id}`}>
+                        <span
+                          className="font-semibold text-blue-600"
+                          data-testid={`cold-votes-${zone.id}`}
+                        >
                           {zone.coldVotes} votes
                         </span>
                       </div>
@@ -330,11 +365,16 @@ export default function Home() {
                     <div className="w-full bg-slate-200 rounded-full h-2">
                       <div
                         className={`h-2 rounded-full transition-all duration-500 ${
-                          hotPercentage >= 50 
-                            ? 'bg-gradient-to-r from-red-500 to-red-400'
-                            : 'bg-gradient-to-r from-blue-500 to-blue-400'
+                          hotPercentage >= 50
+                            ? "bg-gradient-to-r from-red-500 to-red-400"
+                            : "bg-gradient-to-r from-blue-500 to-blue-400"
                         }`}
-                        style={{ width: `${Math.max(hotPercentage, 100 - hotPercentage)}%` }}
+                        style={{
+                          width: `${Math.max(
+                            hotPercentage,
+                            100 - hotPercentage
+                          )}%`,
+                        }}
                       />
                     </div>
                   </div>
@@ -355,19 +395,28 @@ export default function Home() {
           <div className="p-6">
             <div className="grid grid-cols-3 gap-6">
               <div className="text-center">
-                <div className="text-2xl font-bold text-slate-900 mb-1" data-testid="stat-total-votes">
+                <div
+                  className="text-2xl font-bold text-slate-900 mb-1"
+                  data-testid="stat-total-votes"
+                >
                   {stats?.totalVotes || 0}
                 </div>
                 <div className="text-sm text-slate-600">Total Votes</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-red-600 mb-1" data-testid="stat-hot-votes">
+                <div
+                  className="text-2xl font-bold text-red-600 mb-1"
+                  data-testid="stat-hot-votes"
+                >
                   {stats?.hotVotes || 0}
                 </div>
                 <div className="text-sm text-slate-600">Warmer Votes</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600 mb-1" data-testid="stat-cold-votes">
+                <div
+                  className="text-2xl font-bold text-blue-600 mb-1"
+                  data-testid="stat-cold-votes"
+                >
                   {stats?.coldVotes || 0}
                 </div>
                 <div className="text-sm text-slate-600">Cooler Votes</div>
@@ -383,8 +432,8 @@ export default function Home() {
           size="icon"
           className="bg-blue-600 hover:bg-blue-700 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl active:scale-95 transition-all duration-200"
           onClick={() => {
-            queryClient.invalidateQueries({ queryKey: ['/api/zones'] });
-            queryClient.invalidateQueries({ queryKey: ['/api/stats'] });
+            queryClient.invalidateQueries({ queryKey: ["/api/zones"] });
+            queryClient.invalidateQueries({ queryKey: ["/api/stats"] });
           }}
           data-testid="button-refresh"
         >
