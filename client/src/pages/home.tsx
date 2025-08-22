@@ -254,7 +254,7 @@ export default function Home() {
                 The vote count only shows the number of votes cast within the
                 last 10 minutes.
               </p>
-              <div className="flex flex-wrap gap-2 text-sm">
+              {/* <div className="flex flex-wrap gap-2 text-sm">
                 <span className="bg-white px-3 py-1 rounded-full text-slate-600 border border-slate-200">
                   <Users className="w-3 h-3 inline mr-1" />
                   Real-time voting
@@ -267,7 +267,7 @@ export default function Home() {
                   <BarChart3 className="w-3 h-3 inline mr-1" />
                   Majority opinion
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         </Card>
